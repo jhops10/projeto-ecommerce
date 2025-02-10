@@ -1,6 +1,7 @@
 package com.jhops10.ecommerce.controller;
 
 import com.jhops10.ecommerce.model.Usuario;
+import com.jhops10.ecommerce.security.ECToken;
 import com.jhops10.ecommerce.service.usuario.IUsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,15 @@ public class UsuarioController {
         return ResponseEntity.badRequest().build();
     }
 
+    @PostMapping("/login")
+    public ResponseEntity<ECToken> realizarLogin(@RequestBody Usuario usuario) {
+        ECToken token = usuarioService.fazerLogin(usuario.getLogin(), usuario.getSenha());
+        if (token != null) {
+            return ResponseEntity.ok(token);
+        }
+        return ResponseEntity.status(403).build();
+    }
+
     @PutMapping("/usuarios/{id}")
     public ResponseEntity<Usuario> alterarDados(@RequestBody Usuario usuario, @PathVariable Integer id) {
         usuario.setIdUsuario(id);
@@ -35,4 +45,6 @@ public class UsuarioController {
         }
         return ResponseEntity.badRequest().build();
     }
+
+
 }

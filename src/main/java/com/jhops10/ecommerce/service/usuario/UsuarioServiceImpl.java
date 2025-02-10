@@ -3,6 +3,7 @@ package com.jhops10.ecommerce.service.usuario;
 import com.jhops10.ecommerce.dao.UsuarioDAO;
 import com.jhops10.ecommerce.model.Usuario;
 import com.jhops10.ecommerce.security.ECToken;
+import com.jhops10.ecommerce.security.ECTokenUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -31,6 +32,13 @@ public class UsuarioServiceImpl implements IUsuarioService {
 
     @Override
     public ECToken fazerLogin(String login, String senha) {
+        Usuario res = usuarioDAO.findByLogin(login);
+        if (res != null) {
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            if (encoder.matches(senha, res.getSenha())) {
+                return ECTokenUtil.generateToken(res);
+            }
+        }
         return null;
     }
 }
