@@ -22,6 +22,7 @@ public class MySecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/usuarios").permitAll()
                         .requestMatchers(HttpMethod.POST, "/login").permitAll()
                         .requestMatchers(HttpMethod.GET,"/swagger-ui/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/upload").permitAll()
                         .anyRequest().authenticated());
 
         http.addFilterBefore(new MyECFilter(), UsernamePasswordAuthenticationFilter.class);
