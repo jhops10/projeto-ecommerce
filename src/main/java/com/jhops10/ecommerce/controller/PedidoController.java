@@ -1,5 +1,6 @@
 package com.jhops10.ecommerce.controller;
 
+import com.jhops10.ecommerce.dto.FaturamentoMensal;
 import com.jhops10.ecommerce.model.Pedido;
 import com.jhops10.ecommerce.service.pedido.IPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,5 +36,10 @@ public class PedidoController {
            return ResponseEntity.ok(res);
        }
        return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/pedidos/faturamento/{ano}")
+    public ResponseEntity<List<FaturamentoMensal>> recuperarFaturamento(@PathVariable("ano") Integer ano) {
+        return ResponseEntity.ok(pedidoService.recuperarFaturamento(ano));
     }
 }

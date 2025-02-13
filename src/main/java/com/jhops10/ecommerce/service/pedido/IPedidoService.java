@@ -1,5 +1,6 @@
 package com.jhops10.ecommerce.service.pedido;
 
+import com.jhops10.ecommerce.dto.FaturamentoMensal;
 import com.jhops10.ecommerce.model.Pedido;
 
 import java.util.List;
@@ -11,5 +12,6 @@ public interface IPedidoService {
     public List<Pedido> recuperarTodos();
     public Pedido recuperarPeloNumero(Integer numPedido);
     public List<Pedido> recuperarPorStatus(Integer status);
+    public List<FaturamentoMensal> recuperarFaturamento(Integer ano);
 
 }

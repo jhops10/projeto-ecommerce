@@ -1,6 +1,7 @@
 package com.jhops10.ecommerce.service.pedido;
 
 import com.jhops10.ecommerce.dao.PedidoDAO;
+import com.jhops10.ecommerce.dto.FaturamentoMensal;
 import com.jhops10.ecommerce.model.ItemPedido;
 import com.jhops10.ecommerce.model.Pedido;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,5 +53,10 @@ public class PedidoServiceImpl implements IPedidoService {
     @Override
     public List<Pedido> recuperarPorStatus(Integer status) {
         return pedidoDAO.findAllByStatus(status);
+    }
+
+    @Override
+    public List<FaturamentoMensal> recuperarFaturamento(Integer ano) {
+        return pedidoDAO.recuperarFaturamento(ano);
     }
 }
